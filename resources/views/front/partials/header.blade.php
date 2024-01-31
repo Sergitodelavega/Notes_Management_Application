@@ -15,11 +15,13 @@
         </ul>
         <div>
           @guest
-            <a href="{{ route('register') }}" class="btn rounded-pill me-2 btn-outline-warning">S'inscrire</a>
+            {{-- <a href="{{ route('register') }}" class="btn rounded-pill me-2 btn-outline-warning">S'inscrire</a> --}}
             <a href="{{ route('login') }}" class="btn rounded-pill me-2 btn-warning">Se connecter</a>
           @else
-          <form class="d-flex" action="javascript:void(0)">
-            <button type="button" class="btn rounded-pill me-2 btn-warning">S'inscrire'</button>
+          <form id="logout" action="{{ route('logout') }}" method="POST">
+            <a role="button" class="btn rounded-pill me-2 btn-warning"
+            onclick="document.getElementById('logout').submit();">Logout</a>
+            @csrf
           </form>
           @endguest
         </div>
