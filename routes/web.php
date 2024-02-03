@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\{
+    AdminController,
+};
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +19,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware('auth')->group(function() {
+    //Routes for the admin
+    Route::prefix('admin')->group(function() {
+        Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+        
+    });
+
+    //Routes for the student
+    Route::prefix('student')->group(function() {
+        Route::get('/', [StudentController::class, 'index'])->name('student.index');
+        
+    });
+
+    //Routes for the teacher
+    Route::prefix('teacher')->group(function() {
+        Route::get('/', [TeacherController::class, 'index'])->name('teacher.index');
+        
+    });
+
+});
 Route::get('/', function () {
     return view('front.index');
 });
